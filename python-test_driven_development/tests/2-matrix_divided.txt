@@ -5,6 +5,7 @@ How to Use 2-matrix_divided.py
 ==============================
 
 This module defines a matrix division function ``matrix_divided(matrix, div)``.
+This module contains a function (python3 -c 'print __import__('2-matrix_divided').matrix_divided.__doc__)')
 
 Usage
 =====
