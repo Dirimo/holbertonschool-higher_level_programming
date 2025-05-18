@@ -4,53 +4,21 @@
 import unittest
 max_integer = __import__('6-max_integer').max_integer
 
-
 class TestMaxInteger(unittest.TestCase):
-    """Define unittests for max_integer([..])."""
+    """ unittest to check the function """
+    def test_integer(self):
+        self.assertEqual(max_integer([1, 2, 3, 4]), 4)
+        self.assertEqual(max_integer([3, 4, 2, 1]), 4)
+        self.assertEqual(max_integer([-2, -6, -3, -10]), -2)
+        self.assertEqual(max_integer([4]), 4)
 
-    def test_ordered_list(self):
-        """Test an ordered list of integers."""
-        ordered = [1, 2, 3, 4]
-        self.assertEqual(max_integer(ordered), 4)
+    def test_list_empty(self):
+        self.assertEqual(max_integer([]), None)
 
-    def test_unordered_list(self):
-        """Test an unordered list of integers."""
-        unordered = [1, 2, 4, 3]
-        self.assertEqual(max_integer(unordered), 4)
-
-    def test_max_at_beginning(self):
-        """Test a list with the max value at the beginning."""
-        max_at_beginning = [4, 3, 2, 1]
-        self.assertEqual(max_integer(max_at_beginning), 4)
-
-    def test_empty_list(self):
-        """Test an empty list."""
-        empty = []
-        self.assertEqual(max_integer(empty), None)
-
-    def test_one_element_list(self):
-        """Test a list with a single element."""
-        one_element = [7]
-        self.assertEqual(max_integer(one_element), 7)
-
-    def test_floats(self):
-        """Test a list of floats."""
-        floats = [1.53, 6.33, -9.123, 15.2, 6.0]
-        self.assertEqual(max_integer(floats), 15.2)
-
-    def test_ints_and_floats(self):
-        """Test a list of ints and floats."""
-        ints_and_floats = [1.53, 15.5, -9, 15, 6]
-        self.assertEqual(max_integer(ints_and_floats), 15.5)
+    def test_float(self):
+        self.assertEqual(max_integer([5.60, 1, 3.8, 4]), 5.60)
+        self.assertEqual(max_integer([5.23, 2.999, 3.6, 6.4778]), 6.4778)
 
     def test_string(self):
-        """Test a string."""
-        string = "Brennan"
-        with self.assertRaises(TypeError):
-            max_integer(string)
-
-    def test_list_of_strings(self):
-        """Test a list of strings."""
-        strings = ["Brennan", "is", "my", "name"]
-        with self.assertRaises(TypeError):
-            max_integer(strings)
+        self.assertEqual(max_integer(["Holberton", "School"]), 'School')
+        self.assertEqual(max_integer("Holberton"), 't')
