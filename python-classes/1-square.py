@@ -1,9 +1,14 @@
 #!/usr/bin/python3
-"""Define square"""
+"""Define a square"""
 
 
 class Square:
-    """Defines a square based on 0-square.py"""
+    """Square with size"""
 
-    def __int__(self, size):
+    def __init__(self, size):
+        """Initialize square
+
+        Args:
+            size (int): Size of square
+        """
         self.__size = size
