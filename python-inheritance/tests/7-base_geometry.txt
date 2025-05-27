@@ -1,0 +1,43 @@
+# tests
+"""
+This file contains doctests for the BaseGeometry class.
+"""
+
+import sys
+import io
+from 7-base_geometry import BaseGeometry
+
+# Test case 1: Test area() not implemented
+>>> bg = BaseGeometry()
+>>> try:
+...     bg.area()
+... except Exception as e:
+...     print(e)
+area() is not implemented
+
+# Test case 2: Test integer_validator with valid value
+>>> bg = BaseGeometry()
+>>> bg.integer_validator("width", 10)
+
+# Test case 3: Test integer_validator with non-integer value
+>>> bg = BaseGeometry()
+>>> try:
+...     bg.integer_validator("width", "hello")
+... except TypeError as e:
+...     print(e)
+width must be an integer
+
+# Test case 4: Test integer_validator with value less than or equal to 0
+>>> bg = BaseGeometry()
+>>> try:
+...     bg.integer_validator("width", 0)
+... except ValueError as e:
+...     print(e)
+width must be greater than 0
+
+>>> try:
+...     bg.integer_validator("width", -5)
+... except ValueError as e:
+...     print(e)
+width must be greater than 0
+"""
