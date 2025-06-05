@@ -9,8 +9,7 @@ def read_file(filename=""):
     Args:
         filename (str): The nae of the file to read.
     """
-    try:
-        with open(filename, "r", enconding="utf-8") as f:
-            print(f.read(), end="")
-    except FileNotFoundError:
-        pass
+    with open(filename, "r", enconding="utf-8") as file:
+        read_data = file.read()    
+        print(read_data, end="")
+    
