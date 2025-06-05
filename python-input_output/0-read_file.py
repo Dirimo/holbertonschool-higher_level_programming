@@ -18,6 +18,5 @@ def read_file(filename=""):
         to an empty string.
     """
     with open(filename, "r", enconding="utf-8") as file:
-        read_data = file.read()    
+        read_data = file.read()
         print(read_data, end="")
-    
