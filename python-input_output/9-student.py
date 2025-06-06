@@ -1,14 +1,29 @@
 #!/usr/bin/python3
 
+"""
+This module defines a Student class with attributes for
+first name, last name, and age,
+and a method to retrieve a dictionary representation of
+the instance for JSON serialization.
+
+Classes:
+    Student: Defines a student with first name, last name, and age attributes.
+"""
+
 
 class Student:
     """
-    Defines a student by first_name, last_name and age.
+    A class used to represent a Student.
+
+    Attributes:
+        first_name (str): The first name of the student.
+        last_name (str): The last name of the student.
+        age (int): The age of the student.
     """
 
     def __init__(self, first_name, last_name, age):
         """
-        Initializes a Student instance.
+        Initializes the Student instance with first name, last name, and age.
 
         Args:
             first_name (str): The first name of the student.
@@ -21,14 +36,9 @@ class Student:
 
     def to_json(self):
         """
-        Retrieves a dictionary representation of a Student instance.
+        Retrieves a dictionary representation of the Student instance.
 
         Returns:
-            dict: A dictionary containing the attributes
-            of the Student instance.
+            dict: A dictionary containing the instance's attributes.
         """
-        return {
-            'first_name': self.first_name,
-            'last_name': self.last_name,
-            'age': self.age
-        }
+        return self.__dict__
