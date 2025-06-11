@@ -43,3 +43,72 @@ HTTP (Hypertext Transfer Protocol) transmits data in plaintext, making it vulner
 HTTPS (Hypertext Transfer Protocol Secure) is HTTP layered over TLS/SSL encryption, which encrypts data exchanged between client and server, preventing unauthorized access and tampering.It also authenticates the server via digital certificates issued by trusted authorities. HTTPS uses port 443 by default and is considered essential for protecting sensitive data like passwords and credit card information.
 
 HTTPS improves user trust (displaying a padlock in browsers), enhances SEO rankings, and helps comply with legal requirements for data protection.
+
+
+-----------------------------------------------------------------------
+A depiction or outline of the structure of an HTTP request and response
+-----------------------------------------------------------------------
+
+***HTTP Request Structure***
+
+
+<HTTP method> <Request-URI> <HTTP version>
+
+GET /index.html HTTP/1.1
+
+Key-value pairs providing metadata about the request.
+
+Example:
+
+Host: example.com
+User-Agent: Mozilla/5.0
+Accept: text/html
+
+
+HTTP Request:
+---------------
+<Method> <Path> <Version>
+Header1: Value1
+Header2: Value2
+
+[Optional Body]
+
+HTTP Response:
+---------------
+<Version> <Status Code> <Status Text>
+Header1: Value1
+Header2: Value2
+
+[Optional Body]
+
+
+
+-------------------
+Common HTTP Methods
+-------------------
+
+|Method|         |Description|                         |Use Case Example|
+  GET     Retrieves data from the server               Fetching a web page, image, or API data
+  POST    Submits data to the server to create resource Submitting a form, creating a new user in a database
+  PUT     Replaces or updates a resource entirely      Updating a user's profile information
+ DELETE   Deletes a specified resource                 Removing a user or item from a database
+ PATCH    Partially updates a resource                 Changing a user's email address
+ HEAD     Retrieves headers for a resource (no body)   Checking if a resource exists without downloading it
+ OPTIONS  Describes communication options for resource Discovering allowed HTTP methods for an endpoint
+
+
+------------------------
+Common HTTP Status Codes
+------------------------
+
+ |Status Code|         |Description|                  |Scenario Example|
+  200 OK             Request succeeded     Successfully loaded a web page or API response
+  201 Created        Resource created      New user account created after a POST request
+  204 No Content     Success, no content   Successfully deleted a resource, no additional content returned
+ 301 Moved Permanently Resource moved      Redirecting from an old URL to a new one
+  400 Bad Request    Client error          Malformed request, invalid input data
+  401 Unauthorized   Authentication needed Accessing a protected resource without valid credentials
+  403 Forbidden      Access denied         User tries to access a forbidden resource
+  404 Not Found      Resource not found    Requested page or item does not exist
+ 500 Internal Server   Server eror         Unexpected error on the server
+Error                                      
