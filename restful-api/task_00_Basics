@@ -1,0 +1,45 @@
+-------------
+INTRODUCTION
+-------------
+
+In this document you're going to find a summary explaining the differeces between HHTP & HTTP
+A depiction or outline of the structure of an HTTP request and response
+Lists of common HTTP methods and status codes with their descriptions and possible use cases
+
+-----
+HTTP
+-----
+
+HTTP means Hypertext Transfer Protocol.It is a protocol used to transfer data over a network.Most information sent over the Internet, including website content and API calls, usesHTTP. There are two main types of HTTP message: requests and responses
+
+-----
+HTTPS
+-----
+
+HTTPS means the same as HTTP, just with the addition of the S for “secure”, only HTTPS uses  TLS (or SSL) to encrypt HTTP requests and responses.
+
+
+---
+TLS
+---
+
+The Transport Layer Security (TLS) protocol is the enhanced version of SSL, correcting existing SSL vulnerabilities. TLS enables more effective authentication and continues to support encrypted communication channels.
+
+TLS uses a technology called public-key cryptography: there are two keys, a public key and a private key. The public key is shared with client devices via the server's SSL certificate. When a client opens a connection with a server, both devices use the public and private keys to agree on new keys, called session keys, to encrypt their further exchanges.
+
+---
+SSL
+---
+
+Secure Sockets Layer (SSL) is a communications protocol, or set of rules, that creates a secure connection between two devices or applications on a network.SSL, however, is a relatively old technology with security flaws
+
+
+---------------------------------------------------
+Differences Between HTTP and HTTPS (Security Focus)
+---------------------------------------------------
+
+HTTP (Hypertext Transfer Protocol) transmits data in plaintext, making it vulnerable to interception, eavesdropping, and man-in-the-middle attacks. It uses port 80 by default and does not provide encryption or authentication.
+
+HTTPS (Hypertext Transfer Protocol Secure) is HTTP layered over TLS/SSL encryption, which encrypts data exchanged between client and server, preventing unauthorized access and tampering.It also authenticates the server via digital certificates issued by trusted authorities. HTTPS uses port 443 by default and is considered essential for protecting sensitive data like passwords and credit card information.
+
+HTTPS improves user trust (displaying a padlock in browsers), enhances SEO rankings, and helps comply with legal requirements for data protection.
