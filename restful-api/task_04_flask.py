@@ -20,7 +20,7 @@ def home():
 
     Will return a simple message
     """
-    return "Welcome to the Flask API!"
+    return "Welcome to the Flask API, hope you see this shit!"
 
 
 @app.route("/data")
