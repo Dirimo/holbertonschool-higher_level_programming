@@ -1,8 +1,7 @@
 #!/usr/bin/python3
 """
-Script qui affiche toutes les valeurs de la table states
-où le nom correspond à l'argument fourni.
-Protégé contre les injections SQL avec des requêtes paramétrées.
+Script qui liste toutes les villes de la base de données hbtn_0e_4_usa
+avec les informations de leur état correspondant.
 """
 
 try:
@@ -16,19 +15,17 @@ import sys
 
 def main():
     """
-    Fonction principale qui se connecte à MySQL et filtre les états
-    de manière sécurisée
+    Fonction principale qui se connecte à MySQL et liste toutes les villes
     """
     # Vérifier le nombre d'arguments
-    if len(sys.argv) != 5:
-        print("Usage: {} <mysql_user> <mysql_password> <database_name> <state_name>".format(sys.argv[0]))
+    if len(sys.argv) != 4:
+        print("Usage: {} <mysql_user> <mysql_password> <database_name>".format(sys.argv[0]))
         sys.exit(1)
     
     # Récupérer les arguments
     mysql_user = sys.argv[1]
     mysql_password = sys.argv[2]
     database_name = sys.argv[3]
-    state_name = sys.argv[4]
     
     try:
         # Se connecter à la base de données MySQL
@@ -43,13 +40,17 @@ def main():
         # Créer un curseur
         cursor = db.cursor()
         
-        # Requête SQL sécurisée avec paramètre
-        # Le %s sera remplacé de manière sécurisée par MySQLdb
-        query = "SELECT * FROM states WHERE name = %s ORDER BY id ASC"
+        # Requête SQL pour récupérer toutes les villes avec leurs états
+        # JOIN entre les tables cities et states
+        query = """
+        SELECT cities.id, cities.name, states.name 
+        FROM cities 
+        JOIN states ON cities.state_id = states.id 
+        ORDER BY cities.id ASC
+        """
         
-        # Exécuter la requête avec le paramètre
-        # MySQLdb va automatiquement échapper les caractères dangereux
-        cursor.execute(query, (state_name,))
+        # Exécuter la requête (une seule fois comme demandé)
+        cursor.execute(query)
         
         # Récupérer tous les résultats
         results = cursor.fetchall()

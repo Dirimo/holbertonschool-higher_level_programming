@@ -1,31 +1,22 @@
 #!/usr/bin/python3
 """
-Script qui affiche toutes les valeurs de la table states
-où le nom correspond à l'argument fourni.
-Protégé contre les injections SQL avec des requêtes paramétrées.
+Script qui liste toutes les villes d'un état donné depuis la base de données hbtn_0e_4_usa
+Usage: ./script.py <mysql_username> <mysql_password> <database_name> <state_name>
 """
 
-try:
-    import MySQLdb
-except ImportError:
-    import pymysql
-    pymysql.install_as_MySQLdb()
-    import MySQLdb
 import sys
+import MySQLdb
 
 
 def main():
-    """
-    Fonction principale qui se connecte à MySQL et filtre les états
-    de manière sécurisée
-    """
+    """Fonction principale du script"""
     # Vérifier le nombre d'arguments
     if len(sys.argv) != 5:
-        print("Usage: {} <mysql_user> <mysql_password> <database_name> <state_name>".format(sys.argv[0]))
+        print("Usage: {} <mysql_username> <mysql_password> <database_name> <state_name>".format(sys.argv[0]))
         sys.exit(1)
     
     # Récupérer les arguments
-    mysql_user = sys.argv[1]
+    mysql_username = sys.argv[1]
     mysql_password = sys.argv[2]
     database_name = sys.argv[3]
     state_name = sys.argv[4]
@@ -35,7 +26,7 @@ def main():
         db = MySQLdb.connect(
             host="localhost",
             port=3306,
-            user=mysql_user,
+            user=mysql_username,
             passwd=mysql_password,
             db=database_name
         )
@@ -43,12 +34,16 @@ def main():
         # Créer un curseur
         cursor = db.cursor()
         
-        # Requête SQL sécurisée avec paramètre
-        # Le %s sera remplacé de manière sécurisée par MySQLdb
-        query = "SELECT * FROM states WHERE name = %s ORDER BY id ASC"
+        # Exécuter la requête SQL avec protection contre l'injection SQL
+        # Utilisation d'une requête avec JOIN pour récupérer les villes de l'état spécifié
+        query = """
+        SELECT cities.name 
+        FROM cities 
+        JOIN states ON cities.state_id = states.id 
+        WHERE states.name = %s 
+        ORDER BY cities.id ASC
+        """
         
-        # Exécuter la requête avec le paramètre
-        # MySQLdb va automatiquement échapper les caractères dangereux
         cursor.execute(query, (state_name,))
         
         # Récupérer tous les résultats
@@ -56,9 +51,9 @@ def main():
         
         # Afficher les résultats
         for row in results:
-            print(row)
+            print(row[0])
         
-        # Fermer les connexions
+        # Fermer le curseur et la connexion
         cursor.close()
         db.close()
         
