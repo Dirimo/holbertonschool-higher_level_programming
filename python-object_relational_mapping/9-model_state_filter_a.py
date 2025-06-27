@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
-Script qui affiche le premier objet State de la base de données hbtn_0e_6_usa
-Usage: ./script.py <mysql_username> <mysql_password> <database_name>
+Script qui liste tous les objets State contenant la lettre 'a' 
+de la base de données hbtn_0e_6_usa
 """
 
 import sys
@@ -35,15 +35,15 @@ def main():
         Session = sessionmaker(bind=engine)
         session = Session()
         
-        # Requête pour récupérer le premier état (plus petit ID)
-        # Utilisation de first() au lieu de all() pour ne récupérer qu'un seul résultat
-        first_state = session.query(State).order_by(State.id).first()
+        # Requête pour récupérer tous les états contenant la lettre 'a'
+        # Utilisation de like() pour filtrer les noms contenant 'a'
+        states_with_a = session.query(State).filter(
+            State.name.like('%a%')
+        ).order_by(State.id).all()
         
-        # Afficher le résultat
-        if first_state is None:
-            print("Nothing")
-        else:
-            print("{}: {}".format(first_state.id, first_state.name))
+        # Afficher les résultats
+        for state in states_with_a:
+            print("{}: {}".format(state.id, state.name))
         
         # Fermer la session
         session.close()

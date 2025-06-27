@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """
-Script qui affiche le premier objet State de la base de données hbtn_0e_6_usa
-Usage: ./script.py <mysql_username> <mysql_password> <database_name>
+Prints the state object with the name passed as argument from the database hbtn_0e_6_usa
 """
 
 import sys
@@ -13,14 +12,15 @@ from model_state import Base, State
 def main():
     """Fonction principale du script"""
     # Vérifier le nombre d'arguments
-    if len(sys.argv) != 4:
-        print("Usage: {} <mysql_username> <mysql_password> <database_name>".format(sys.argv[0]))
+    if len(sys.argv) != 5:
+        print("Usage: {} <mysql_username> <mysql_password> <database_name> <state_name>".format(sys.argv[0]))
         sys.exit(1)
     
     # Récupérer les arguments
     mysql_username = sys.argv[1]
     mysql_password = sys.argv[2]
     database_name = sys.argv[3]
+    state_name = sys.argv[4]
     
     try:
         # Créer l'URL de connexion à la base de données
@@ -35,15 +35,16 @@ def main():
         Session = sessionmaker(bind=engine)
         session = Session()
         
-        # Requête pour récupérer le premier état (plus petit ID)
-        # Utilisation de first() au lieu de all() pour ne récupérer qu'un seul résultat
-        first_state = session.query(State).order_by(State.id).first()
+        # Requête sécurisée pour rechercher l'état par nom
+        # SQLAlchemy protège automatiquement contre l'injection SQL
+        # en utilisant des paramètres liés
+        state = session.query(State).filter(State.name == state_name).first()
         
         # Afficher le résultat
-        if first_state is None:
-            print("Nothing")
+        if state is None:
+            print("Not found")
         else:
-            print("{}: {}".format(first_state.id, first_state.name))
+            print("{}".format(state.id))
         
         # Fermer la session
         session.close()
