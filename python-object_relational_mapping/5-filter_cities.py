@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
 Script qui liste toutes les villes d'un état donné depuis la base de données hbtn_0e_4_usa
-Usage: ./script.py <mysql_username> <mysql_password> <database_name> <state_name>
+
 """
 
 import sys
