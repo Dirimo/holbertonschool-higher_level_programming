@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Script qui liste toutes les villes d'un état donné depuis la base de données hbtn_0e_4_usa
+Script that takes the name of a state as an argument and lists all cities of that state, in this database hbtn_0e_4_usa
 
 """
 
