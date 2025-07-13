@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/node
 // This script prints multiple messages to the console
 
 console.log("C is fun"); 
