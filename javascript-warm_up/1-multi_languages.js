@@ -1,6 +1,10 @@
 #!/usr/bin/node
 // This script prints multiple messages to the console
 
-console.log("C is fun"); 
-console.log("Python is cool");
-console.log("JavaScript is amazing");
+const sentence1 = 'C is fun';
+const sentence2 = 'Python is cool'; 
+const sentence3 = 'JavaScript is amazing';
+
+console.log(sentence1); 
+console.log(sentence2);
+console.log(sentence3);
