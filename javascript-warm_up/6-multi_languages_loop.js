@@ -1,5 +1,7 @@
 #!/usr/bin/node
 
-for (let i = 0; i < 5; i++) {
-  console.log("Hello World!");
+const messages = ["C is fun", "Python is cool", "JavaScript is amazing"];
+
+for (let i = 0; i < messages.legth; i++) {
+  console.log(messages[i]);
 }
