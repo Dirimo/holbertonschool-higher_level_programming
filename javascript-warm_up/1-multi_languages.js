@@ -1,5 +1,4 @@
 #!/usr/bin/node
-// This script prints multiple messages to the console
 
 const sentence1 = 'C is fun';
 const sentence2 = 'Python is cool'; 
