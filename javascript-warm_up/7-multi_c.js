@@ -1,7 +1,5 @@
-#!/usr/bin/node
-
-const num = process.argv[2];
-
+#!/usr/bin/env node
+const num = parseInt(process.argv[2]);
 for (let index = 0; index < num; index++) {
-    console.log("C is fun");
+  console.log('C is fun');
 }
