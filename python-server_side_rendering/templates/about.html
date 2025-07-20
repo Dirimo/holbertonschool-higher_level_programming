@@ -1,14 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-         <title>My Flask App</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>My Flask App</title>
     </head>
     <body>
-          {% include 'header.html' %}
-         <h1>About Us</h1>
-         <p>
-            With content describing the page.
-         </p>
+          {% include 'header.html' %} {# Includes the header.html template #}
+
+          <main>
+              <h1>About Us</h1>
+              <p>
+                  Welcome to the About page of my Flask app.
+                  This application is a simple Flask application
+                  that demonstrates the use of HTML templates using Jinja2 and Flask
+              </p>
+              <p>
+                We focus on the use of HTML templates using Jinja2 and Flask to enhance the user experience
+                consistently across different pages.
+              </p>
+          </main>
+         
           {% include 'footer.html' %}
     </body>
 </html>

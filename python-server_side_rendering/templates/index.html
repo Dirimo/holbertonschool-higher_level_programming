@@ -1,16 +1,23 @@
 <!doctype html>
    <html lang="en">
    <head>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
        <title>My Flask App</title>
    </head>
    <body>
         {% include 'header.html' %}
-       <h1>Welcome to My Flask App</h1>
-       <p>This is a simple Flask application.</p>
-       <ul>
+    <main>
+        <h1>Welcome to My Flask App</h1>
+        <p>This is a simple Flask application.</p>
+        <p> You can navigue through the following pages:</p>
+        <ul>
            <li>Flask</li>
            <li>HTML</li>
            <li>Templates</li>
+           <li>Reusable Components</li>
        </ul>
+    </main>
+        {% include 'footer.html' %} {# Includes the footer.html template #}
    </body>
    </html>
