@@ -1,23 +1,29 @@
-#!/usr/bin/python3
-from flask import Flask, render_template
 
-"""
-Simple API using Python & Flask"""
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
-
 @app.route('/')
 def home():
-       return render_template('index.html')
+    """
+    Renders the home page (index.html).
+    """
+    return render_template('index.html')
 
 @app.route('/about')
 def about():
-       return render_template('about.html')
+    """
+    Renders the about page (about.html).
+    """
+    return render_template('about.html')
 
 @app.route('/contact')
 def contact():
-       return render_template('contact.html')
+    """
+    Renders the contact page (contact.html).
+    """
+    return render_template('contact.html')
 
 if __name__ == '__main__':
-       app.run(debug=True, port=5000)
+    # Run the Flask application on port 5000 in debug mode
+    app.run(debug=True, port=5000)

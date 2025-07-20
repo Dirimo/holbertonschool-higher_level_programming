@@ -1,71 +1,71 @@
-#!/usr/bin/python3
+import logging
 import os
-"""
-    Generate invitations based on a template and a list of attendees.
-      Args:
-        template (str): The invitation template.
-        attendees (list): A list of attendee dictionaries.    Raises:
-        ValueError: If the template is not a string, if the attendees
-                    list is empty, or if the attendees list is not a
-                    list of dictionaries.
-"""
 
+# Configure logging to display error messages
+logging.basicConfig(level=logging.ERROR, format='%(levelname)s: %(message)s')
 
-def generate_invitations(template, attendees):    # Many checks
-    try:
-        if not isinstance(template, str):
-            raise ValueError("[ERROR] The template must be a string.")
+def generate_invitations(template, attendees):
+    """
+    Generates personalized invitation files from a template with placeholders
+    and a list of attendees.
 
-        if not template.strip():
-            raise ValueError("[ERROR] The template must not be empty.")
+    Args:
+        template (str): The content of the template with placeholders.
+        attendees (list): A list of dictionaries, where each dictionary
+                          represents an attendee with their data.
+    """
 
-        if not isinstance(attendees, list):
-            raise ValueError("[ERROR] Attendees must be a list.")
-
-        if not attendees:
-            raise ValueError("[ERROR] Attendees list must not be empty.")
-
-        for item in attendees:
-            if not isinstance(item, dict):
-                raise ValueError(
-                    "[ERROR] Attendees list must be a list of dictionaries."
-                )
-
-        template_content = template
-        if not template_content.strip():
-            print("Template is empty, no output files generated.")
-            return
-
-    except ValueError as err:
-        print(err)
+    # Input Type Validation
+    if not isinstance(template, str):
+        logging.error("Invalid input: template must be a string.")
         return
-    # If missing keys in the attendees list and update them with N/A
-    for item in attendees:
-        if not item.get('name'):
-            item.update({'name': 'N/A'})
 
-        if not item.get('event_title'):
-            item.update({'event_title': 'N/A'})
+    if not isinstance(attendees, list) or not all(isinstance(a, dict) for a in attendees):
+        logging.error("Invalid input: attendees must be a list of dictionaries.")
+        return
 
-        if not item.get('event_date'):
-            item.update({'event_date': 'N/A'})
+    # Handle Empty Inputs
+    if not template:
+        logging.error("Template is empty, no output files generated.")
+        return
 
-        if not item.get('event_location'):
-            item.update({'event_location': 'N/A'})
+    if not attendees:
+        logging.error("No data provided, no output files generated.")
+        return
 
-    # Generate the invitations
-    for item in attendees:
-        invitation = template_content
-        invitation = invitation.replace('{{name}}', item['name'])
-        invitation = invitation.replace('{{event_title}}', item['event_title'])
-        invitation = invitation.replace('{{event_date}}', item['event_date'])
-        invitation = invitation.replace(
-            '{{event_location}}', item['event_location']
-        )
+    # Define the expected placeholders
+    # The keys here correspond to the dictionary keys of the attendees
+    placeholders_mapping = {
+        "name": "{name}",
+        "event_title": "{event_title}",
+        "event_date": "{event_date}",
+        "event_location": "{event_location}"
+    }
 
-        # Save the invitation in a file
-        filename = f"{item['name']}.html"
-        with open(filename, "w") as file:
-            file.write(invitation)
-        print(f"Invitation for {item['name']} saved in {filename}")
+    # Process Each Attendee and Generate Output Files
+    for i, attendee in enumerate(attendees):
+        output_filename = f"output_{i + 1}.txt"
+        processed_template = template
+
+        # Replace each placeholder
+        for key, placeholder in placeholders_mapping.items():
+            # Use .get() to handle missing keys, with None as default
+            value = attendee.get(key)
+
+            # If the value is missing (None) or not provided, use "N/A"
+            if value is None:
+                value_to_replace = "N/A"
+            else:
+                value_to_replace = str(value) # Ensure the value is a string
+
+            # Perform the replacement
+            processed_template = processed_template.replace(placeholder, value_to_replace)
+
+        # Write the processed content to an output file
+        try:
+            with open(output_filename, 'w') as f:
+                f.write(processed_template)
+            print(f"Generated {output_filename}") # Confirmation message for the terminal
+        except IOError as e:
+            logging.error(f"Error writing file {output_filename}: {e}")
         
